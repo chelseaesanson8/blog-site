@@ -4,9 +4,9 @@ import Image from "next/image";
 export default async function HomeIntro() {
   return (
     <div className="relative text-slate-800 py-10 px-6 sm:px-10">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mx-auto">
         {/* Image Section */}
-        <div className="relative w-full md:w-auto">
+        <div className="relative w-50 md:w-50">
           <Image
             src="/intro-image.JPG"
             alt="intro-image"
@@ -22,16 +22,17 @@ export default async function HomeIntro() {
 
         {/* Text Section */}
         <div className="space-y-5 md:text-left">
-          <h2 className="text-3xl sm:text-2xl md:text-3xl font-bold font-heading text-slate-800 tracking-wide w-full md:w-auto whitespace-nowrap">
-            web developer building cool stuff
-          </h2>
-          <h2 className="text-lg sm:text-xl text-slate-800 italic font-sans">
+          <h2 className="text-5xl sm:text-2xl md:text-5xl py-5 font-black font-heading text-slate-800 tracking-tighter w-full md:w-auto whitespace-nowrap">
+            CHELSEA SANSON
+            </h2>
+                  
+          <h2 className="text-xl sm:text-xl text-slate-600 italic font-sans">
             coffee enthusiast <span className="text-orange-400">(i own an AeroPress)</span>
           </h2>
-          <h2 className="text-lg sm:text-xl text-slate-800 italic font-sans">
+          <h2 className="text-xl sm:text-xl text-slate-600 italic font-sans">
             beep boop music enjoyer
           </h2>
-          <h2 className="text-lg sm:text-xl text-slate-800 italic font-sans">
+          <h2 className="text-xl sm:text-xl text-slate-600 italic font-sans">
             sometimes in a <span className="underline decoration-wavy decoration-orange-400">cave?</span>
           </h2>
           
@@ -39,7 +40,7 @@ export default async function HomeIntro() {
           {/* CTA Button */}
           <Link 
             href="/posts"
-            className="inline-block bg-slate-500 text-white px-6 py-2 rounded-md text-lg font-medium shadow-md hover:bg-slate-600 transition font-heading"
+            className="inline-block bg-slate-700 text-white px-6 py-2 rounded-md text-lg font-medium shadow-md hover:bg-zinc-400 transition font-heading"
           >
             buy me a coffee ☕️
           </Link>

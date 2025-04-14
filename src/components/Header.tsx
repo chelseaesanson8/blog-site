@@ -14,20 +14,20 @@ export default function Header() {
             </div>
             <div>
                 <ul className="flex items-center space-x-10">
-                    <li className="text-slate-700 font-sans text-lg hover:text-orange-400">
-                        <Link href="/">home</Link>
+                    <li className="text-slate-800 font-heading text-xl font-black hover:text-orange-400">
+                        <Link href="/">HOME</Link>
                     </li>
-                    <li className="text-slate-700 font-sans text-lg hover:text-orange-400">
-                        <Link href="/">blog</Link>
+                    <li className="text-slate-800 font-heading text-xl font-black hover:text-orange-400">
+                        <Link href="/">BLOG</Link>
                     </li>
-                    <li className="text-slate-700 font-sans text-lg hover:text-orange-400">
-                        <Link href="/">case studies</Link>
+                    <li className="text-slate-800 font-heading text-xl font-black hover:text-orange-400">
+                        <Link href="/">CASE STUDIES</Link>
                     </li>
-                    <li className="text-slate-700 font-sans text-lg hover:text-orange-400">
-                            <Link href="/">newsletter</Link>
+                    <li className="text-slate-800 font-heading text-xl font-black hover:text-orange-400">
+                            <Link href="/">NEWSLETTER</Link>
                     </li>
-                    <li className="text-slate-700 font-sans text-lg hover:text-orange-400">
-                        <Link href="/">contact</Link>
+                    <li className="text-slate-800 font-heading text-xl font-black hover:text-orange-400">
+                        <Link href="/">CONTACT</Link>
                     </li>
                 </ul>
             </div>
