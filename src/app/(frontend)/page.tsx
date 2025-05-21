@@ -6,6 +6,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
 
+
 const options = { next: { revalidate: 60 } };
 export default async function Page() {
   const posts = await client.fetch(POSTS_QUERY, {}, options);
@@ -21,7 +22,7 @@ export default async function Page() {
       */}
       <div className="flex items-center gap-8 md:gap-12 px-6 mx-auto my-10 max-w-screen-2xl">
         <h2 className="text-5xl my-10 tracking-tighter font-heading text-slate-800 dark:text-slate-200">BLOG</h2>
-        <ul className="flex items-center space-x-10">
+        <ul className="flex items-center space-x-10 hidden">
           <li className="bg-zinc-200 dark:bg-zinc-800 pt-1 pb-1 pr-3 pl-3 rounded text-zinc-900 dark:text-zinc-100">web</li>
           <li className="bg-zinc-200 dark:bg-zinc-800 pt-1 pb-1 pr-3 pl-3 rounded text-zinc-900 dark:text-zinc-100">lifestyle</li>
           <li className="bg-zinc-200 dark:bg-zinc-800 pt-1 pb-1 pr-3 pl-3 rounded text-zinc-900 dark:text-zinc-100">travel</li>
@@ -59,6 +60,8 @@ export default async function Page() {
             </li>
           ))}
         </ul>
+      </div>
+      <div>
       </div>
     </section>
   );
