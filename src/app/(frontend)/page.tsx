@@ -4,8 +4,13 @@ import { client } from "@/sanity/lib/client";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Accordion from "@/components/Accordion";
 
+const items = [
+  { title: 'Web Developer - 898 Marketing (2023-Present)', content: 'Built custom websites for companies using a WordPress stack (Elementor, ACF, PHP) and SanityCMS stack (Next.js, Sanity, Tailwind)' },
+  { title: 'Student IT Technican - Youngstown State University', content: 'Assisted students and faculity/staff with IT related questions/issues' }
 
+]
 
 const options = { next: { revalidate: 60 } };
 export default async function Page() {
@@ -61,7 +66,9 @@ export default async function Page() {
           ))}
         </ul>
       </div>
-      <div>
+      <div className="pb-12 px-6 w-full max-w-screen-2xl mx-auto">
+        <h2 className="text-5xl my-10 tracking-tighter font-heading text-slate-800 dark:text-slate-200">EXPERIENCES</h2>
+        <Accordion items={items} />
       </div>
     </section>
   );
