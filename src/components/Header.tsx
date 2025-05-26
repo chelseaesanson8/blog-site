@@ -28,9 +28,9 @@ export default function Header() {
     }
 
     return (
-        <header className="bg-white dark:bg-zinc-900">
-            <div className="flex items-center justify-center p-10">
-                <div className="mr-20">
+        <header className="bg-white dark:bg-zinc-900 sticky top-0 z-50 shadow-sm dark:shadow-zinc-800/80 backdrop-blur-sm">
+            <div className="flex p-10 items-center justify-center">
+                <div className="mr-20 pr-10">
                     <Avatar>
                         <AvatarImage src="/avatars/nav-avatar.JPG" />
                         <AvatarFallback>CS</AvatarFallback>
@@ -75,28 +75,28 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="lg:hidden"
+                        className="lg:hidden pr-5 border-t-2 border-orange-400 dark:border-orange-400"
                     >
                         <motion.ul
-                            className="space-y-10"
+                            className="space-y-10 pl-10 pt-10 pb-10"
                             variants={listVariants}
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
                         >
-                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-center">
+                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">HOME</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-center">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/posts">BLOG</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-center">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">CASE STUDIES</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-center">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">NEWSLETTER</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-center">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">CONTACT</Link>
                             </motion.li>
                         </motion.ul>

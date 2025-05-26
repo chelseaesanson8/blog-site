@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import Accordion from "@/components/Accordion";
+import ExperiencesSection from "@/components/ExperiencesSection";
 
 const items = [
   { title: 'Web Developer - 898 Marketing (2023-Present)', content: 'Built custom websites for companies using a WordPress stack (Elementor, ACF, PHP) and SanityCMS stack (Next.js, Sanity, Tailwind)' },
@@ -57,7 +57,7 @@ export default async function Page() {
                     className="block hover:text-orange-400 dark:hover:text-orange-400 font-heading tracking-tighter text-2xl font-semibold text-slate-800 dark:text-slate-200"
                     href={`/posts/${post?.slug?.current}`}
                   >
-                    {post?.title?.toUpperCase()}
+                    {post?.title}
                   </Link>
                   <p className="text-slate-700 dark:text-slate-400 font-sans text-lg">{post.publishedAt}</p>
                 </div>
@@ -66,10 +66,7 @@ export default async function Page() {
           ))}
         </ul>
       </div>
-      <div className="pb-12 px-6 w-full max-w-screen-2xl mx-auto">
-        <h2 className="text-5xl my-10 tracking-tighter font-heading text-slate-800 dark:text-slate-200">EXPERIENCES</h2>
-        <Accordion items={items} />
-      </div>
+      <ExperiencesSection />
     </section>
   );
 }

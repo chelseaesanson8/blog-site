@@ -26,13 +26,13 @@ export default async function HomeIntro() {
             CHELSEA SANSON
           </h2>
 
-          <h2 className="text-xl sm:text-xl dark:text-white text-slate-700 dark:text-slate-400 italic font-sans">
+          <h2 className="text-2xl dark:text-white text-slate-700 dark:text-slate-400 italic font-heading tracking-tighter">
             coffee enthusiast <span className="text-orange-400">(i own an AeroPress)</span>
           </h2>
-          <h2 className="text-xl sm:text-xl dark:text-white text-slate-700 dark:text-slate-400 italic font-sans">
+          <h2 className="text-2xl dark:text-white text-slate-700 dark:text-slate-400 italic font-heading tracking-tighter">
             beep boop music enjoyer
           </h2>
-          <h2 className="text-xl sm:text-xl dark:text-white text-slate-700 dark:text-slate-400 italic font-sans">
+          <h2 className="text-2xl dark:text-white text-slate-700 dark:text-slate-400 italic font-heading tracking-tighter">
             sometimes in a <span className="underline decoration-wavy decoration-orange-400">cave?</span>
           </h2>
 

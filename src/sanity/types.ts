@@ -68,6 +68,23 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Experience = {
+  _id: string;
+  _type: "experience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  jobTitle?: string;
+  company?: string;
+  startDate?: string;
+  endDate?: {
+    isCurrent?: boolean;
+    date?: string;
+  };
+  description?: string;
+  skills?: Array<string>;
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -278,7 +295,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Experience | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
@@ -354,6 +371,36 @@ export type POST_QUERYResult = {
     name: string | null;
   } | null;
 } | null;
+// Variable: EXPERIENCES_QUERY
+// Query: *[_type == "experience"]{  _id, jobTitle, company, startDate, endDate, "isCurrent": endDate.isCurrent, description, skills}
+export type EXPERIENCES_QUERYResult = Array<{
+  _id: string;
+  jobTitle: string | null;
+  company: string | null;
+  startDate: string | null;
+  endDate: {
+    isCurrent?: boolean;
+    date?: string;
+  } | null;
+  isCurrent: boolean | null;
+  description: string | null;
+  skills: Array<string> | null;
+}>;
+// Variable: EXPERIENCE_QUERY
+// Query: *[_type == "experience" && _id == $id][0]{  _id, jobTitle, company, startDate, endDate, "isCurrent": endDate.isCurrent, description, skills}
+export type EXPERIENCE_QUERYResult = {
+  _id: string;
+  jobTitle: string | null;
+  company: string | null;
+  startDate: string | null;
+  endDate: {
+    isCurrent?: boolean;
+    date?: string;
+  } | null;
+  isCurrent: boolean | null;
+  description: string | null;
+  skills: Array<string> | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -361,5 +408,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name}, publishedAt\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage, author->{name}\n}": POST_QUERYResult;
+    "*[_type == \"experience\"]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCES_QUERYResult;
+    "*[_type == \"experience\" && _id == $id][0]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCE_QUERYResult;
   }
 }
