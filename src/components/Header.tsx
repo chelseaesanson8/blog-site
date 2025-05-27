@@ -89,7 +89,7 @@ export default function Header() {
                             variants={listVariants}
                             initial="hidden"
                             animate="visible"
-                            exit="hidden"
+                            exit="exit"
                         >
                             <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">HOME</Link>

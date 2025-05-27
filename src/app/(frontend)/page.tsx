@@ -6,12 +6,6 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import ExperiencesSection from "@/components/ExperiencesSection";
 
-const items = [
-  { title: 'Web Developer - 898 Marketing (2023-Present)', content: 'Built custom websites for companies using a WordPress stack (Elementor, ACF, PHP) and SanityCMS stack (Next.js, Sanity, Tailwind)' },
-  { title: 'Student IT Technican - Youngstown State University', content: 'Assisted students and faculity/staff with IT related questions/issues' }
-
-]
-
 const options = { next: { revalidate: 60 } }
 export default async function Page() {
 
@@ -48,20 +42,19 @@ export default async function Page() {
         <ul className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 sm:grid-cols-1 gap-10">
           {posts.map((post) => (
             <li key={post._id}>
-              <div className="">
-                <div>
+              <div className="h-full flex flex-col">
+                <div className="relative aspect-[4/3]">
                   {post?.mainImage && (
                     <Image
-                      className="rounded"
+                      className="rounded object-cover"
                       src={urlFor(post.mainImage).auto("format").url()}
                       alt={post?.mainImage?.alt || " "}
-                      width={500} // Adjust width as needed
-                      height={500} // Adjust height as needed
-                      layout="responsive"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   )}
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 flex-grow">
                   <Link
                     className="block hover:text-orange-400 dark:hover:text-orange-400 font-heading tracking-tighter text-2xl font-semibold text-slate-800 dark:text-slate-200"
                     href={`/posts/${post?.slug?.current}`}
