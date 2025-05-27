@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { EXPERIENCES_QUERY } from "@/sanity/lib/queries";
 import Accordion from "./Accordion";
 
-const options = { next: { revalidate: 2 } };
+const options = { next: { revalidate: 60 } };
 
 export default async function ExperiencesSection() {
     const experiences = await client.fetch(EXPERIENCES_QUERY, {}, options);

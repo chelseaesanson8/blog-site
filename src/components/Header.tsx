@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import ThemeToggle from "./ThemeToggle";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const listVariants = {
     visible: {
@@ -23,6 +24,12 @@ const itemVariants = {
 
 export default function Header() {
     const [isToggled, setToggle] = useState(false);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        setToggle(false);
+    }, [pathname]);
+
     const handleToggle = () => {
         setToggle(prev => !prev);
     }

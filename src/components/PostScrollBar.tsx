@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll } from "motion/react"
+import { motion, useScroll } from "framer-motion"
 
 export default function PostScrollBar() {
     const { scrollYProgress } = useScroll()
@@ -12,11 +12,12 @@ export default function PostScrollBar() {
                 style={{
                     scaleX: scrollYProgress,
                     position: "fixed",
-                    top: 0,
+                    top: "120px",
                     left: 0,
                     right: 0,
                     height: 5,
                     originX: 0,
+                    zIndex: 50,
                 }}
                 className="bg-orange-400"
             />

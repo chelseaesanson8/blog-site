@@ -12,9 +12,18 @@ const items = [
 
 ]
 
-const options = { next: { revalidate: 60 } };
+const options = { next: { revalidate: 60 } }
 export default async function Page() {
-  const posts = await client.fetch(POSTS_QUERY, {}, options);
+
+  const posts = await client.fetch(POSTS_QUERY, {}, options)
+  const formattedDate = (postedAt: string) => {
+    const date = new Date(postedAt);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    }).format(date).replace(/\//g, '-')
+  }
 
   return (
     <section className="bg-white dark:bg-zinc-900">
@@ -59,7 +68,7 @@ export default async function Page() {
                   >
                     {post?.title}
                   </Link>
-                  <p className="text-slate-700 dark:text-slate-400 font-sans text-lg">{post.publishedAt}</p>
+                  <p className="mt-2 text-slate-700 dark:text-slate-400 font-sans text-lg">{post.publishedAt ? formattedDate(post.publishedAt) : 'No date'}</p>
                 </div>
               </div>
             </li>
