@@ -50,7 +50,7 @@ export default function Header() {
                             <Link href="/">HOME</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/posts">BLOG</Link>
+                            <Link href="/blog">BLOG</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
                             <Link href="/">CASE STUDIES</Link>

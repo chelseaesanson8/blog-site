@@ -43,7 +43,7 @@ export default async function Page() {
           {posts.map((post) => (
             <li key={post._id}>
               <div className="h-full flex flex-col">
-                <div className="relative aspect-[4/3]">
+                <div className="relative aspect-[5/3]">
                   {post?.mainImage && (
                     <Image
                       className="rounded object-cover"
@@ -57,7 +57,7 @@ export default async function Page() {
                 <div className="mt-5 flex-grow">
                   <Link
                     className="block hover:text-orange-400 dark:hover:text-orange-400 font-heading tracking-tighter text-2xl font-semibold text-slate-800 dark:text-slate-200"
-                    href={`/posts/${post?.slug?.current}`}
+                    href={`/blog/${post?.slug?.current}`}
                   >
                     {post?.title}
                   </Link>
