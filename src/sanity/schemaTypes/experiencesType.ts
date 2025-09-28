@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 import { TimelineIcon } from '@sanity/icons'
 
 export const experiencesType = defineType({
