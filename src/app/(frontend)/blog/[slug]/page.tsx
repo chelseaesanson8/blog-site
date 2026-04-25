@@ -35,12 +35,12 @@ export default async function Page({
         <div className="order-1 sm:order-2">
           {post?.mainImage && (
             <Image
-              className="rounded"
+              className="rounded w-full h-auto"
               src={urlFor(post.mainImage).auto("format").url()}
               alt={post?.mainImage?.alt || " "}
               width={500}
               height={500}
-              layout="responsive"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           )}
         </div>

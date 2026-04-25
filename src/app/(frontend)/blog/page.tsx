@@ -25,14 +25,13 @@ export default async function Page() {
 
   const featuredPost = sortedPosts[0]; // Latest post
   const remainingPosts = sortedPosts.slice(1); // All posts except the latest
-  console.log(posts);
 
   return (
     <div className="bg-white dark:bg-zinc-900 min-h-screen w-full pt-8 sm:pt-16">
       <div className="px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 mx-auto max-w-screen-2xl p-8 sm:p-12 rounded-xl transition-all duration-300 hover:bg-gray-100/80 dark:hover:bg-zinc-800/50 hover:backdrop-blur-sm hover:shadow-lg">
           <div className="my-5 sm:my-20 p-5 sm:p-10 order-2 sm:order-1">
-            <h1 className="text-3xl sm:text-5xl font-bold text-balance text-slate-800 dark:text-slate-200 font-heading tracking-tighter text-slate-800 dark:text-slate-200">{featuredPost?.title}</h1>
+            <h1 className="text-3xl sm:text-5xl font-bold text-balance text-slate-800 dark:text-slate-200 font-heading tracking-tighter">{featuredPost?.title}</h1>
             {featuredPost?.author?.name && (
               <div className="flex items-center gap-5">
                 <h2 className="py-4 text-2xl font-heading dark:text-orange-400 text-orange-400 text-balance tracking-tighter font-semibold"> by {featuredPost.author.name}</h2>
@@ -43,12 +42,12 @@ export default async function Page() {
           <div className="order-1 sm:order-2 ">
             {featuredPost?.mainImage && (
               <Image
-                className="rounded aspect-[5/3]"
+                className="rounded aspect-[5/3] w-full h-auto"
                 src={urlFor(featuredPost.mainImage).auto("format").url()}
                 alt={featuredPost?.mainImage?.alt || " "}
                 width={500}
                 height={500}
-                layout="responsive"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             )}
           </div>
