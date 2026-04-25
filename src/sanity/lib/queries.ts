@@ -15,3 +15,7 @@ export const EXPERIENCES_QUERY = defineQuery(`*[_type == "experience"]{
 export const EXPERIENCE_QUERY = defineQuery(`*[_type == "experience" && _id == $id][0]{
   _id, jobTitle, company, startDate, endDate, "isCurrent": endDate.isCurrent, description, skills
 }`)
+
+export const CASE_STUDIES_QUERY = defineQuery(`*[_type == "caseStudy"] | order(order asc){
+  _id, title, year, description, stack, liveUrl, sourceUrl
+}`)

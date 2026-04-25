@@ -47,19 +47,19 @@ export default function Header() {
                 <div className="hidden lg:block">
                     <ul className="flex items-center space-x-10">
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">HOME</Link>
+                            <Link href="/">Home</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/blog">BLOG</Link>
+                            <Link href="/blog">Blog</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">CASE STUDIES</Link>
+                            <Link href="/">Case Studies</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">NEWSLETTER</Link>
+                            <Link href="/">Newsletter</Link>
                         </li>
                         <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">CONTACT</Link>
+                            <Link href="/">Contact</Link>
                         </li>
                         <li>
                             <ThemeToggle />
@@ -92,19 +92,19 @@ export default function Header() {
                             exit="exit"
                         >
                             <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">HOME</Link>
+                                <Link href="/">Home</Link>
                             </motion.li>
                             <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/posts">BLOG</Link>
+                                <Link href="/posts">Blog</Link>
                             </motion.li>
                             <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">CASE STUDIES</Link>
+                                <Link href="/">Case Studies</Link>
                             </motion.li>
                             <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">NEWSLETTER</Link>
+                                <Link href="/">Newsletter</Link>
                             </motion.li>
                             <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">CONTACT</Link>
+                                <Link href="/">Contact</Link>
                             </motion.li>
                         </motion.ul>
                     </motion.div>

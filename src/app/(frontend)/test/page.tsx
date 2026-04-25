@@ -20,7 +20,7 @@ const formattedDate = (postedAt: string) => {
         .replace(/\//g, "-");
 };
 
-export default async function Page() {
+export default async function TestPage() {
     const posts = await client.fetch(POSTS_QUERY, {}, options);
 
     return (

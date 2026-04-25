@@ -23,7 +23,7 @@ export default function Accordion({ experiences }: { experiences: EXPERIENCES_QU
             {sortedExperiences.map((experience, index) => (
                 <div key={experience?._id} className='border-b'>
                     <button
-                        className='w-full text-left py-2 font-heading tracking-tighter text-2xl font-light text-slate-800 dark:text-slate-200'
+                        className='w-full text-left py-2 font-sans tracking-tighter text-2xl font-light text-slate-800 dark:text-slate-200'
                         onClick={() => toggle(index)}
                     >
                         {experience?.jobTitle + " @ " + experience?.company}

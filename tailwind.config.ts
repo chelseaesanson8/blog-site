@@ -17,7 +17,8 @@ const config: Config = {
 			},
 			fontFamily: {
 				sans: "var(--font-inter)",
-				heading: "var(--font-barlow)"
+				heading: "var(--font-barlow)",
+				display: "var(--font-fraunces)"
 			},
 			colors: {
 				background: 'hsl(var(--background))',
