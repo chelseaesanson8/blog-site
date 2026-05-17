@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import ThemeToggle from "./ThemeToggle";
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import CSLogo from "./CSLogo";
 
 const listVariants = {
     visible: {
@@ -37,29 +37,23 @@ export default function Header() {
     return (
         <header className="bg-white dark:bg-zinc-900 sticky top-0 z-50 shadow-sm dark:shadow-zinc-800/80 backdrop-blur-sm">
             <div className="flex p-10 items-center justify-center">
-                <div className="mr-20 pr-10">
-                    <Avatar>
-                        <AvatarImage src="/avatars/nav-avatar.JPG" />
-                        <AvatarFallback>CS</AvatarFallback>
-                    </Avatar>
+                <div className="mr-20">
+                    <CSLogo className="w-24"/>
                 </div>
                 {/* Desktop Menu */}
                 <div className="hidden lg:block">
                     <ul className="flex items-center space-x-10">
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400">
                             <Link href="/">Home</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400">
                             <Link href="/blog">Blog</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">Case Studies</Link>
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                            <Link href="/#case-studies">Case Studies</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">Newsletter</Link>
-                        </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400">
-                            <Link href="/">Contact</Link>
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                            <Link href="/#contact">Contact</Link>
                         </li>
                         <li>
                             <ThemeToggle />
@@ -91,20 +85,17 @@ export default function Header() {
                             animate="visible"
                             exit="exit"
                         >
-                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">Home</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/posts">Blog</Link>
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                                <Link href="/blog">Blog</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">Case Studies</Link>
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                                <Link href="/#case-studies" onClick={() => setToggle(false)}>Case Studies</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">Newsletter</Link>
-                            </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-black hover:text-orange-400 dark:hover:text-orange-400 text-left">
-                                <Link href="/">Contact</Link>
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                                <Link href="/#contact" onClick={() => setToggle(false)}>Contact</Link>
                             </motion.li>
                         </motion.ul>
                     </motion.div>

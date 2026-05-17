@@ -11,7 +11,7 @@ export default async function CaseStudySection() {
     if (!projects.length) return null;
 
     return (
-        <section className="w-full bg-stone-950 text-white">
+        <section id="case-studies" className="w-full bg-stone-950 text-white">
             <div className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 pt-24 pb-24">
                 <div className="flex items-end justify-between mb-16 md:mb-20">
                     <div>

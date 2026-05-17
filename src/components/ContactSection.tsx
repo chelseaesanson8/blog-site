@@ -6,7 +6,7 @@ const BG_IMAGE = "https://images.unsplash.com/photo-1599940824219-e6aa9be5fba2?q
 
 export default function ContactSection() {
     return (
-        <section className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 py-16 md:py-24">
+        <section id="contact" className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 py-16 md:py-24">
             <div className="relative overflow-hidden rounded-3xl min-h-[520px] md:min-h-[600px] flex items-center justify-center">
                 <Image
                     src={BG_IMAGE}
@@ -30,12 +30,12 @@ export default function ContactSection() {
                         <span className="font-display italic font-medium">together</span>.
                     </h2>
                     <p className="font-sans text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
-                        Have a project in mind, a role to fill, or just want to say hi? My inbox is open.
+                        Have a project in mind, a role to fill, or just want to catch up? <br></br> My inbox is open.
                     </p>
 
                     <Link
                         href="mailto:chels@developedbychels.com"
-                        className="group inline-flex items-center gap-3 font-heading text-base md:text-lg uppercase tracking-wider text-white"
+                        className="group inline-flex items-center gap-3 font-heading text-base md:text-lg tracking-wider text-white"
                     >
                         <span className="relative">
                             chels@developedbychels.com
