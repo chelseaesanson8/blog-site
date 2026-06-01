@@ -19,3 +19,8 @@ export const EXPERIENCE_QUERY = defineQuery(`*[_type == "experience" && _id == $
 export const CASE_STUDIES_QUERY = defineQuery(`*[_type == "caseStudy"] | order(order asc){
   _id, title, year, description, stack, liveUrl, sourceUrl
 }`)
+
+export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings" && _id == "siteSettings"][0]{
+  "resumeUrl": resume.asset->url,
+  resumeFileName
+}`)

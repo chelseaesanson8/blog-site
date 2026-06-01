@@ -13,6 +13,26 @@
  */
 
 // Source: schema.json
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  resume?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+  resumeFileName?: string;
+};
+
 export type CaseStudy = {
   _id: string;
   _type: "caseStudy";
@@ -284,7 +304,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = CaseStudy | Experience | Post | BlockContent | SanityImageCrop | SanityImageHotspot | Author | Slug | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = SiteSettings | CaseStudy | Experience | Post | BlockContent | SanityImageCrop | SanityImageHotspot | Author | Slug | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
@@ -374,6 +394,12 @@ export type CASE_STUDIES_QUERYResult = Array<{
   liveUrl: string | null;
   sourceUrl: string | null;
 }>;
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{  "resumeUrl": resume.asset->url,  resumeFileName}
+export type SITE_SETTINGS_QUERYResult = {
+  resumeUrl: string | null;
+  resumeFileName: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -384,5 +410,6 @@ declare module "@sanity/client" {
     "*[_type == \"experience\"]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCES_QUERYResult;
     "*[_type == \"experience\" && _id == $id][0]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCE_QUERYResult;
     "*[_type == \"caseStudy\"] | order(order asc){\n  _id, title, year, description, stack, liveUrl, sourceUrl\n}": CASE_STUDIES_QUERYResult;
+    "*[_type == \"siteSettings\" && _id == \"siteSettings\"][0]{\n  \"resumeUrl\": resume.asset->url,\n  resumeFileName\n}": SITE_SETTINGS_QUERYResult;
   }
 }
