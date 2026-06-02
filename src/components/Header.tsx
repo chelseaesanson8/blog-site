@@ -43,16 +43,16 @@ export default function Header() {
                 {/* Desktop Menu */}
                 <div className="hidden lg:block">
                     <ul className="flex items-center space-x-10">
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400">
                             <Link href="/">Home</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400">
                             <Link href="/blog">Blog</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
                             <Link href="/#case-studies">Case Studies</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
                             <Link href="/#contact">Contact</Link>
                         </li>
                         <li>
@@ -85,16 +85,16 @@ export default function Header() {
                             animate="visible"
                             exit="exit"
                         >
-                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/">Home</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
                                 <Link href="/blog">Blog</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
                                 <Link href="/#case-studies" onClick={() => setToggle(false)}>Case Studies</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-xl font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
                                 <Link href="/#contact" onClick={() => setToggle(false)}>Contact</Link>
                             </motion.li>
                         </motion.ul>
