@@ -36,23 +36,23 @@ export default function Header() {
 
     return (
         <header className="bg-white dark:bg-zinc-900 sticky top-0 z-50 shadow-sm dark:shadow-zinc-800/80 backdrop-blur-sm">
-            <div className="flex p-10 items-center justify-center">
+            <div className="flex p-5 justify-between items-center">
                 <div className="mr-20">
                     <CSLogo className="w-24"/>
                 </div>
                 {/* Desktop Menu */}
                 <div className="hidden lg:block">
                     <ul className="flex items-center space-x-10">
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-black/70 dark:text-white/70 font-heading text-lg font-light dark:hover:text-white/90 hover:text-black/50">
                             <Link href="/">Home</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400">
+                        <li className="text-black/70 dark:text-white/70 font-heading text-lg font-light dark:hover:text-white/90 hover:text-black/50">
                             <Link href="/blog">Blog</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                        <li className="text-black/70 dark:text-white/70 font-heading text-lg font-light dark:hover:text-white/90 hover:text-black/50 scroll-mt">
                             <Link href="/#case-studies">Case Studies</Link>
                         </li>
-                        <li className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 scroll-mt">
+                        <li className="text-black/70 dark:text-white/70 font-heading text-lg font-light dark:hover:text-white/90 hover:text-black/50 scroll-mt">
                             <Link href="/#contact">Contact</Link>
                         </li>
                         <li>
