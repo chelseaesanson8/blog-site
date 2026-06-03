@@ -92,15 +92,16 @@ export type Post = {
     alt?: string;
     _type: "image";
   };
-  categories?: Array<{
+  category?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    _key: string;
     [internalGroqTypeReferenceTo]?: "category";
-  }>;
+  };
   publishedAt?: string;
   body?: BlockContent;
+  excerpt?: string;
+  readTime?: number;
 };
 
 export type BlockContent = Array<{
@@ -308,7 +309,7 @@ export type AllSanitySchemaTypes = SiteSettings | CaseStudy | Experience | Post 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage, author->{name}, publishedAt}
+// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}}
 export type POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -330,9 +331,15 @@ export type POSTS_QUERYResult = Array<{
     name: string | null;
   } | null;
   publishedAt: string | null;
+  excerpt: string | null;
+  readTime: number | null;
+  category: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage, author->{name}}
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}}
 export type POST_QUERYResult = {
   title: string | null;
   body: BlockContent | null;
@@ -351,6 +358,13 @@ export type POST_QUERYResult = {
   } | null;
   author: {
     name: string | null;
+  } | null;
+  publishedAt: string | null;
+  excerpt: string | null;
+  readTime: number | null;
+  category: {
+    title: string | null;
+    slug: Slug | null;
   } | null;
 } | null;
 // Variable: EXPERIENCES_QUERY
@@ -405,8 +419,8 @@ export type SITE_SETTINGS_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name}, publishedAt\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage, author->{name}\n}": POST_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POSTS_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POST_QUERYResult;
     "*[_type == \"experience\"]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCES_QUERYResult;
     "*[_type == \"experience\" && _id == $id][0]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCE_QUERYResult;
     "*[_type == \"caseStudy\"] | order(order asc){\n  _id, title, year, description, stack, liveUrl, sourceUrl\n}": CASE_STUDIES_QUERYResult;

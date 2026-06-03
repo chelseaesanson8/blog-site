@@ -19,6 +19,10 @@ const monthYear = (postedAt: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' })
     .format(new Date(postedAt));
 
+const postDate = (postedAt: string) =>
+  new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    .format(new Date(postedAt));
+
 export default async function Page() {
   const posts = await client.fetch(POSTS_QUERY, {}, options);
   const sortedPosts = posts.sort((a, b) => {
@@ -51,7 +55,7 @@ export default async function Page() {
           </div>
         </div>
         <hr className="border-t border-black/10 dark:border-white/10" />
-        <div className="flex flex-col lg:flex-row mt-10 rounded-xl overflow-hidden bg-gray-100/80 dark:bg-zinc-800 border border-black/10 dark:border-white/10">
+        <div className="flex flex-col lg:flex-row mt-10 rounded-xl overflow-hidden bg-neutral-100 dark:bg-zinc-800 border border-black/10 dark:border-white/10">
           <div className="lg:w-2/5 w-full shrink-0">
               {featuredPost?.mainImage && (
               <Image
@@ -67,7 +71,7 @@ export default async function Page() {
           <div className="flex flex-col justify-center px-8 py-8 gap-6">
             <div>
               <p className="text-xs tracking-widest uppercase text-orange-400 font-sans mb-3">
-                  Featured &middot; {featuredPost.category}
+                  Featured &middot; {featuredPost.category?.title}
               </p>
               <h3 className="font-display text-3xl text-slate-700 dark:text-white">{featuredPost.title}</h3>
               <p className="font-sans text-sm text-slate-600 dark:text-white/60 leading-relaxed max-w-xl">
@@ -88,10 +92,11 @@ export default async function Page() {
         </div>
       </div>
       <div className="pb-20">
-        <div className="mx-10 pt-10 flex">
-            <p className="hidden md:block font-sans text-xs tracking-widest uppercase text-black/50 dark:text-white/50"> — All Posts</p>
+        <div className="mx-10 pt-10 pb-6 sm:pb-0 flex items-center justify-between">
+          <p className="font-sans text-xs tracking-widest uppercase text-black/50 dark:text-white/50">— All Posts</p>
+          <p className="font-sans text-xs tracking-widest uppercase text-black/50 dark:text-white/50">{remainingPosts.length} Posts</p>
         </div>
-        <div className="grid grid-cols-[64px_1fr_90px_110px] mx-10 pl-4 pt-8 gap-x-8 pb-3 border-b border-black/10 dark:border-white/10">
+        <div className="hidden sm:grid grid-cols-[64px_1fr_90px_110px] mx-10 pl-4 pt-8 gap-x-8 pb-3 border-b border-black/10 dark:border-white/10">
           <div />
           <span className="text-xs tracking-widest uppercase text-black/50 dark:text-white/50 font-sans">Title</span>
           <span className="text-xs tracking-widest uppercase text-black/50 dark:text-white/50 font-sans">Date</span>
@@ -101,36 +106,63 @@ export default async function Page() {
           <Link
             key={post._id}
             href={`/blog/${post.slug?.current}`}
-            className="grid grid-cols-[64px_1fr_90px_110px] gap-x-8 mx-10 pl-4 items-center py-5 border-b border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition-colors group"
+            className="block mx-10 py-5 border-b border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition-colors group"
           >
-            <div className="relative w-16 h-12">
-              {post?.mainImage && (
-                <Image
-                  className="rounded object-cover"
-                  src={urlFor(post.mainImage).auto("format").url()}
-                  alt={post?.mainImage?.alt || " "}
-                  fill
-                  sizes="64px"
-                />
-              )}
+            {/* Mobile: card layout */}
+            <div className="flex sm:hidden gap-5 items-start">
+              <div className="relative w-24 h-20 flex-shrink-0">
+                {post?.mainImage && (
+                  <Image
+                    className="rounded object-cover"
+                    src={urlFor(post.mainImage).auto("format").url()}
+                    alt={post?.mainImage?.alt || " "}
+                    fill
+                    sizes="96px"
+                  />
+                )}
+              </div>
+              <div className="flex flex-col gap-2 flex-1 min-w-0">
+                <p className="text-xs tracking-widest uppercase text-black/40 dark:text-white/40 font-sans">
+                  {post.category?.title}
+                </p>
+                <p className="font-heading text-lg text-slate-800 dark:text-white group-hover:text-orange-400 transition-colors leading-tight">
+                  {post.title}
+                </p>
+                <div className="flex gap-6 text-sm text-black/50 dark:text-white/40 font-sans mt-1">
+                  <span>{post.publishedAt ? postDate(post.publishedAt) : ''}</span>
+                  <span>{post.readTime} min read</span>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <p className="font-heading text-lg text-slate-800 dark:text-white/90 group-hover:text-orange-400 transition-colors">
-                {post.title}
-              </p>
-              <p className="text-xs tracking-widest uppercase text-black/40 dark:text-white/30 font-sans mt-1">
-                {post.category}
-              </p>
+            {/* Desktop: table row */}
+            <div className="hidden sm:grid grid-cols-[64px_1fr_90px_110px] gap-x-8 pl-4 items-center">
+              <div className="relative w-16 h-12">
+                {post?.mainImage && (
+                  <Image
+                    className="rounded object-cover"
+                    src={urlFor(post.mainImage).auto("format").url()}
+                    alt={post?.mainImage?.alt || " "}
+                    fill
+                    sizes="64px"
+                  />
+                )}
+              </div>
+              <div>
+                <p className="font-heading text-lg text-slate-800 dark:text-white/90 group-hover:text-orange-400 transition-colors">
+                  {post.title}
+                </p>
+                <p className="text-xs tracking-widest uppercase text-black/40 dark:text-white/30 font-sans mt-1">
+                  {post.category?.title}
+                </p>
+              </div>
+              <span className="font-sans text-sm text-black/50 dark:text-white/40">
+                {post.publishedAt ? monthYear(post.publishedAt) : ''}
+              </span>
+              <span className="font-sans text-sm text-black/50 dark:text-white/40">
+                {post.readTime} min read
+              </span>
             </div>
-
-            <span className="font-sans text-sm text-black/50 dark:text-white/40">
-              {post.publishedAt ? monthYear(post.publishedAt) : ''}
-            </span>
-
-            <span className="font-sans text-sm text-black/50 dark:text-white/40">
-              {post.readTime} min read
-            </span>
           </Link>
         ))}
       </div>

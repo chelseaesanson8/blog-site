@@ -43,9 +43,9 @@ export const postType = defineType({
       ]
     }),
     defineField({
-      name: 'categories',
-      type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+      name: 'category',
+      type: 'reference',
+      to: {type: 'category'},
     }),
     defineField({
       name: 'publishedAt',
@@ -54,6 +54,19 @@ export const postType = defineType({
     defineField({
       name: 'body',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+      rows: 3,
+      validation: Rule => Rule.max(200),
+    }),
+    defineField({
+      name: 'readTime',
+      title: 'Read Time (minutes)',
+      type: 'number',
+      validation: Rule => Rule.min(1).integer(),
     }),
   ],
   preview: {
