@@ -1,11 +1,11 @@
 import { defineQuery } from 'next-sanity'
 
 export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12]{
-  _id, title, slug, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}
+  _id, title, slug, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}
 }`)
 
 export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
-  title, body, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}
+  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}
 }`)
 
 export const EXPERIENCES_QUERY = defineQuery(`*[_type == "experience"]{

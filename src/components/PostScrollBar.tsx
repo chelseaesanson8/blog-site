@@ -12,10 +12,10 @@ export default function PostScrollBar() {
                 style={{
                     scaleX: scrollYProgress,
                     position: "fixed",
-                    top: "120px",
+                    top: "100px",
                     left: 0,
                     right: 0,
-                    height: 5,
+                    height: 1.5,
                     originX: 0,
                     zIndex: 50,
                 }}

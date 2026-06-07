@@ -309,7 +309,7 @@ export type AllSanitySchemaTypes = SiteSettings | CaseStudy | Experience | Post 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}}
+// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}}
 export type POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -329,6 +329,36 @@ export type POSTS_QUERYResult = Array<{
   } | null;
   author: {
     name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    bio: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
   } | null;
   publishedAt: string | null;
   excerpt: string | null;
@@ -339,9 +369,10 @@ export type POSTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}}
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}}
 export type POST_QUERYResult = {
   title: string | null;
+  slug: Slug | null;
   body: BlockContent | null;
   mainImage: {
     asset?: {
@@ -358,6 +389,36 @@ export type POST_QUERYResult = {
   } | null;
   author: {
     name: string | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    bio: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
   } | null;
   publishedAt: string | null;
   excerpt: string | null;
@@ -419,8 +480,8 @@ export type SITE_SETTINGS_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage, author->{name}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POST_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POSTS_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POST_QUERYResult;
     "*[_type == \"experience\"]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCES_QUERYResult;
     "*[_type == \"experience\" && _id == $id][0]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCE_QUERYResult;
     "*[_type == \"caseStudy\"] | order(order asc){\n  _id, title, year, description, stack, liveUrl, sourceUrl\n}": CASE_STUDIES_QUERYResult;

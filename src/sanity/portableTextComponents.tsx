@@ -7,19 +7,21 @@ export const components: PortableTextComponents = {
         image: (props) =>
             props.value ? (
                 <div>
-                    <Image
-                        className="rounded-lg not-prose w-auto h-auto"
-                        src={urlFor(props.value)
-                            .width(500)
-                            .height(500)
-                            .quality(100)
-                            .auto("format")
-                            .url()}
-                        alt={props?.value?.alt || ""}
-                        width="400"
-                        height="200"
-                    />
-                    <p className="font-sans dark:text-stone-400 text-stone-500">({props?.value?.alt})</p>
+                    <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                        <Image
+                            className="object-cover not-prose"
+                            src={urlFor(props.value)
+                                .width(500)
+                                .height(500)
+                                .quality(100)
+                                .auto("format")
+                                .url()}
+                            alt={props?.value?.alt || ""}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 800px"
+                        />
+                    </div>
+                    <p className="mt-2 not-prose font-sans dark:text-stone-400 text-stone-500">({props?.value?.alt})</p>
                 </div>
             ) : null,
 

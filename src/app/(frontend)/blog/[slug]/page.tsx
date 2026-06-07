@@ -1,3 +1,4 @@
+import PostScrollBar from "@/components/PostScrollBar";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
@@ -5,53 +6,71 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import { components } from "@/sanity/portableTextComponents";
-import PostScrollBar from "@/components/PostScrollBar";
+import ShareButtons from "@/components/ShareButtons";
+import AuthorBox from "@/components/AuthorBox";
+
+const monthYear = (postedAt: string) =>
+  new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' })
+    .format(new Date(postedAt));
 
 
 export default async function Page({
-  params,
+    params,
 }: {
-  params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string }>;
 }) {
-  const { data: post } = await sanityFetch({
-    query: POST_QUERY,
-    params: await params,
-  });
+    const { data: post } = await sanityFetch({
+        query: POST_QUERY,
+        params: await params,
+    });
 
-  if (!post) {
-    notFound();
-  }
+    if (!post) {
+        notFound();
+    }
 
-  return (
-    <div className="bg-white dark:bg-zinc-900 min-h-screen w-full">
-      <PostScrollBar />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 p-10 mx-auto max-w-screen-2xl">
-        <div className="my-5 sm:my-20 p-5 sm:p-10 order-2 sm:order-1">
-          <h1 className="text-3xl sm:text-5xl font-bold text-balance text-slate-800 dark:text-slate-200 font-heading tracking-tighter text-slate-800 dark:text-slate-200">{post?.title?.toUpperCase()}</h1>
-          {post?.author?.name && (
-            <h2 className="py-4 text-2xl font-heading dark:text-orange-400 text-orange-400 text-balance tracking-tighter font-semibold"> by {post.author.name.toUpperCase()}</h2>
-          )}
-        </div>
-        <div className="order-1 sm:order-2">
-          {post?.mainImage && (
-            <Image
-              className="rounded w-full h-auto"
-              src={urlFor(post.mainImage).auto("format").url()}
-              alt={post?.mainImage?.alt || " "}
-              width={500}
-              height={500}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          )}
-        </div>
-      </div>
-      <div className="p-10 flex justify-center items-center">
-        {post?.body ? (
-          <div className="prose prose-slate dark:prose-invert max-w-screen-2xl">
-            <PortableText value={post?.body} components={components} />
+    return (
+        
+        <div className="bg-white dark:bg-zinc-900 min-h-screen w-full">
+        <PostScrollBar />
+        <div className="max-w-3xl mx-auto px-6 py-16">
+          <div className="flex gap-2 font-sans text-xs tracking-widest uppercase text-orange-400">
+            <span>{post.category?.title}</span>
+            <span>|</span>
+            <span>{post?.readTime} MIN READ</span>
           </div>
-        ) : null}
-      </div>
-    </div>
+          <h2 className="pt-4 pb-4 font-display font-light text-4xl md:text-5xl text-slate-800 dark:text-white">{post?.title}</h2>
+          <div className="pb-10 flex gap-2 font-sans font-xs">
+            <span className="text-orange-400">{post?.author?.name}</span>
+            <span className="text-black/20 dark:text-white/20">|</span>
+            <span className="text-black/50 dark:text-white/50">{post?.publishedAt ? monthYear(post.publishedAt) : ''}</span>
+          </div>
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+            {post?.mainImage && (
+              <Image
+                className="object-cover"
+                src={urlFor(post.mainImage).auto("format").url()}
+                alt={post?.mainImage?.alt || " "}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            )}
+          </div>
+          <div className="pt-6">
+            {post?.body ? (
+              <div className="prose prose-invert prose-headings:font-display prose-headings:font-light prose-headings:mt-8 prose-headings:mb-3 prose-p:font-sans prose-p:text-black/70 prose-p:dark:text-white/70 prose-p:leading-relaxed prose-p:my-3 prose-a:text-orange-400 max-w-none">
+                <PortableText value={post?.body} components={components} />
+              </div>
+            ) : null}
+          </div>
+          <div className="flex items-center gap-4 my-12">
+            <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
+            <span className="text-black/20 dark:text-white/20 text-xs">◆</span>
+            <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
+          </div>
+          <ShareButtons title={post.title} slug={post.slug?.current ?? ''} />
+          <AuthorBox author={post.author} />
+        </div>
+        </div>
+      
   );
 }
