@@ -26,7 +26,7 @@ export default function ExperiencesMinimalAccordion({ experiences }: { experienc
     };
 
     return (
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-700 border-t border-zinc-200 dark:border-zinc-700">
+        <ul className="divide-y divide-zinc-200 dark:divide-white/10 border-t border-zinc-200 dark:border-white/10">
             {sorted.map((experience, index) => {
                 const isOpen = openIndex === index;
                 const start = formatYear(experience.startDate);
@@ -49,20 +49,20 @@ export default function ExperiencesMinimalAccordion({ experiences }: { experienc
                                     />
                                 )}
                                 <div>
-                                    <h3 className="font-heading font-normal text-xl md:text-2xl tracking-tight text-slate-800 dark:text-slate-100 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-orange-400">
+                                    <h3 className="font-heading font-normal text-xl md:text-2xl tracking-tight text-slate-800 dark:text-white transition-transform duration-300 group-hover:translate-x-2 group-hover:text-orange-400">
                                         {experience.jobTitle}
                                     </h3>
-                                    <p className="mt-2 font-sans text-sm text-slate-600 dark:text-slate-400">
+                                    <p className="mt-2 font-sans text-sm text-slate-600 dark:text-white/40">
                                         {experience.company}
                                     </p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-6 shrink-0">
-                                <span className="hidden sm:inline font-sans text-xs tracking-widest uppercase text-slate-600 dark:text-slate-400">
+                                <span className="hidden sm:inline font-sans text-xs tracking-widest uppercase text-slate-600 dark:text-white/40">
                                     {range}
                                 </span>
                                 <ChevronDown
-                                    className={`w-5 h-5 text-slate-500 dark:text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                                    className={`w-5 h-5 text-slate-500 dark:text-white/40 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
                                 />
                             </div>
                         </button>
@@ -77,7 +77,7 @@ export default function ExperiencesMinimalAccordion({ experiences }: { experienc
                                     className="overflow-hidden"
                                 >
                                     <div className="pb-8 pl-0 sm:pl-6 max-w-3xl">
-                                        <p className="font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                                        <p className="font-sans text-base leading-relaxed text-slate-700 dark:text-white/60">
                                             {experience.description}
                                         </p>
                                         {experience.skills && experience.skills.length > 0 && (
@@ -85,7 +85,7 @@ export default function ExperiencesMinimalAccordion({ experiences }: { experienc
                                                 {experience.skills.map((skill, i) => (
                                                     <span
                                                         key={i}
-                                                        className="px-2.5 py-1 font-sans text-xs tracking-wider uppercase text-slate-700 dark:text-slate-300 border border-zinc-300 dark:border-zinc-600 rounded-sm"
+                                                        className="px-2.5 py-1 font-sans text-xs tracking-wider uppercase text-slate-700 dark:text-white/60 border border-zinc-300 dark:border-white/20 rounded-sm"
                                                     >
                                                         {skill}
                                                     </span>

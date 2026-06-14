@@ -1,52 +1,54 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, ArrowRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import ExperiencesMinimal from "@/components/ExperiencesMinimal";
 import ContactSection from "@/components/ContactSection";
 import CaseStudySection from "@/components/CaseStudySection";
+import BlogTable from "@/components/BlogTable";
 
 const options = { next: { revalidate: 60 } };
-
-const formattedDate = (postedAt: string) => {
-    const date = new Date(postedAt);
-    return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-    })
-        .format(date)
-        .replace(/\//g, "-");
-};
 
 export default async function Page() {
     const posts = await client.fetch(POSTS_QUERY, {}, options);
 
     return (
         <section className="bg-white dark:bg-zinc-900">
-            {/* Hero */}
-            <div className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 pt-32 pb-32">
-                <div className="flex flex-col md:flex-row md:items-center gap-12 md:gap-16">
-                    <div className="flex-1 flex flex-col gap-8">
-                        <p className="text-sm tracking-widest font-heading uppercase text-slate-700 dark:text-slate-200">
-                            &mdash; Web Developer
+            <div className="max-w-8xl mx-auto px-10 pt-6 lg:pt-24 pb-12 lg:pb-24">
+                <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-12 md:gap-24 md:items-center">
+                    <div>
+                        <div className="relative aspect-video md:aspect-[3/4] overflow-hidden rounded-sm">
+                            <Image
+                                src="/intro-image.JPG"
+                                alt="Chelsea Sanson"
+                                fill
+                                quality={95}
+                                sizes="(max-width: 768px) 90vw, 280px"
+                                className="object-cover grayscale hover:grayscale-0 transition duration-700"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-8">
+                        <p className="text-sm tracking-widest font-heading uppercase text-black/50 dark:text-white/50">
+                            &mdash; Chelsea Sanson
                         </p>
-                        <h1 className="font-heading font-normal text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-slate-800 dark:text-slate-100">
-                            Hi, I&apos;m Chelsea{" "}
+                        <h1 className="font-heading font-normal text-5xl md:text-7xl lg:text-7xl leading-[1.05] tracking-tight text-slate-800 dark:text-white">
+                            Building things for the{" "}
                             <span className="relative inline-block font-display italic font-medium">
-                                Sanson
+                                web
                                 <span
                                     aria-hidden
                                     className="absolute left-0 right-0 -bottom-1 h-[6px] bg-orange-400/80"
                                 />
                             </span>
                         </h1>
-                        <p className="font-sans text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-2xl leading-relaxed">
-                            I craft digital experiences with clean code and thoughtful design. Currently focused on building products that matter.
+                        <p className="font-sans text-md md:text-xl text-black/80 dark:text-white/75 max-w-2xl leading-relaxed">
+                            I&apos;m Chels, a frontend developer based in Northeast Ohio. When I&apos;m not working with code you&apos;ll probably find me hanging out watching competitive Call of Duty, outdoors somewhere, or listening to edm music.
                         </p>
 
-                        <div className="mt-4 flex flex-wrap gap-8 text-slate-700 dark:text-slate-300">
+                        <div className="mt-4 flex flex-wrap gap-8 text-slate-700 dark:text-white/70">
                             <Link
                                 href="https://github.com/chelseaesanson8"
                                 target="_blank" rel="noopener noreferrer"
@@ -81,52 +83,28 @@ export default async function Page() {
                             </Link>
                         </div>
                     </div>
-
-                    {/* Visual anchor */}
-                    <div className="w-48 md:w-60 lg:w-72 shrink-0 mx-auto md:mx-0">
-                        <div className="relative aspect-[3/4] overflow-hidden rounded-sm">
-                            <Image
-                                src="/intro-image.JPG"
-                                alt="Chelsea Sanson"
-                                fill
-                                quality={95}
-                                sizes="(max-width: 768px) 192px, (max-width: 1024px) 240px, 288px"
-                                className="object-cover grayscale hover:grayscale-0 transition duration-700"
-                            />
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            {/* Blog */}
-            <div className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 pt-16 pb-24">
-                <p className="text-sm tracking-widest font-heading uppercase text-slate-700 dark:text-slate-200">
+            <div className="mx-10 pt-16">
+                <p className="text-sm tracking-widest font-heading uppercase text-black/50 dark:text-white/50">
                     &mdash; What&apos;s On My Mind
                 </p>
-                <h2 className="font-heading font-normal text-5xl md:text-6xl mt-5 mb-12 tracking-tight text-slate-800 dark:text-slate-100">
-                    Thoughts
-                </h2>
+                <div className="flex items-end justify-between mt-5">
+                    <h2 className="font-heading font-normal text-5xl md:text-6xl tracking-tight text-slate-800 dark:text-white">
+                        Thoughts
+                    </h2>
+                    <Link href="/blog" className="hidden sm:block">
+                        <span className="inline-flex items-center gap-2 border border-black/20 dark:border-white/20 rounded-lg text-black/40 dark:text-white/40 text-xs tracking-widest uppercase px-6 py-3 hover:border-black/40 dark:hover:border-white/40 hover:text-black/60 dark:hover:text-white/60 transition-colors">View All →</span>
+                    </Link>
+                </div>
+            </div>
+            <BlogTable posts={posts} />
 
-                <ul className="divide-y divide-zinc-200 dark:divide-zinc-700">
-                    {posts.map((post) => (
-                        <li key={post._id}>
-                            <Link
-                                href={`/blog/${post?.slug?.current}`}
-                                className="group flex items-start justify-between gap-6 py-8"
-                            >
-                                <div className="flex-1">
-                                    <h3 className="font-heading font-normal text-xl md:text-2xl tracking-tight text-slate-800 dark:text-slate-100 transition-transform duration-300 group-hover:translate-x-2 group-hover:text-orange-400">
-                                        {post?.title}
-                                    </h3>
-                                    <p className="mt-3 font-sans text-sm tracking-wider uppercase text-slate-600 dark:text-slate-400">
-                                        {post.publishedAt ? formattedDate(post.publishedAt) : "No date"}
-                                    </p>
-                                </div>
-                                <ArrowRight className="mt-3 w-6 h-6 text-slate-400 dark:text-slate-500 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-orange-400" />
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+            <div className="sm:hidden mx-10 pb-10">
+                <Link href="/blog">
+                    <span className="inline-flex items-center gap-2 border border-black/20 dark:border-white/20 rounded-lg text-black/40 dark:text-white/40 text-xs tracking-widest uppercase px-6 py-3 hover:border-black/40 dark:hover:border-white/40 hover:text-black/60 dark:hover:text-white/60 transition-colors">View All →</span>
+                </Link>
             </div>
 
             <ExperiencesMinimal />

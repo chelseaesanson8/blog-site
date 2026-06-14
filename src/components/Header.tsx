@@ -73,7 +73,7 @@ export default function Header() {
                 </div>
                 {/* Mobile Menu Button */}
                 <div className="lg:hidden space-x-5 flex ml-20">
-                    <button onClick={handleToggle} aria-label={isToggled ? "Close menu" : "Open menu"} className="text-slate-800 dark:text-slate-200">
+                    <button onClick={handleToggle} aria-label={isToggled ? "Close menu" : "Open menu"} className="text-black/70 dark:text-white/70">
                         {isToggled ? <X /> : <Menu />}
                     </button>
                     <ThemeToggle />
@@ -96,16 +96,16 @@ export default function Header() {
                             animate="visible"
                             exit="exit"
                         >
-                            <motion.li variants={itemVariants} className="content-center text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                            <motion.li variants={itemVariants} className="content-center text-black/70 dark:text-white/70 font-heading text-lg font-light hover:text-black/50 dark:hover:text-white/90 text-left">
                                 <Link href="/">Home</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                            <motion.li variants={itemVariants} className="text-black/70 dark:text-white/70 font-heading text-lg font-light hover:text-black/50 dark:hover:text-white/90 text-left scroll-mt">
                                 <Link href="/blog">Blog</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left scroll-mt">
+                            <motion.li variants={itemVariants} className="text-black/70 dark:text-white/70 font-heading text-lg font-light hover:text-black/50 dark:hover:text-white/90 text-left scroll-mt">
                                 <Link href="/#case-studies" onClick={(e) => navigateToAnchor(e, 'case-studies')}>Case Studies</Link>
                             </motion.li>
-                            <motion.li variants={itemVariants} className="text-slate-800 dark:text-slate-200 font-heading text-lg font-light hover:text-orange-400 dark:hover:text-orange-400 text-left">
+                            <motion.li variants={itemVariants} className="text-black/70 dark:text-white/70 font-heading text-lg font-light hover:text-black/50 dark:hover:text-white/90 text-left">
                                 <Link href="/#contact" onClick={(e) => navigateToAnchor(e, 'contact')}>Contact</Link>
                             </motion.li>
                         </motion.ul>

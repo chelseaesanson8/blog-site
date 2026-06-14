@@ -21,7 +21,7 @@ export const components: PortableTextComponents = {
                             sizes="(max-width: 768px) 100vw, 800px"
                         />
                     </div>
-                    <p className="mt-2 not-prose font-sans dark:text-stone-400 text-stone-500">({props?.value?.alt})</p>
+                    <p className="mt-2 not-prose font-sans dark:text-white/40 text-stone-500">({props?.value?.alt})</p>
                 </div>
             ) : null,
 

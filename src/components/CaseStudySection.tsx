@@ -12,7 +12,7 @@ export default async function CaseStudySection() {
 
     return (
         <section id="case-studies" className="w-full bg-stone-950 text-white">
-            <div className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 pt-24 pb-24">
+            <div className="mx-10 pt-24 pb-24">
                 <div className="flex items-end justify-between mb-16 md:mb-20">
                     <div>
                         <p className="text-sm tracking-widest font-heading uppercase text-white/60">
@@ -44,14 +44,14 @@ export default async function CaseStudySection() {
 
                                     <div className="flex-1 flex flex-col gap-5">
                                         <div className="flex items-baseline justify-between gap-6">
-                                            <h3 className="font-heading font-normal text-3xl md:text-4xl lg:text-5xl tracking-tight text-white transition-transform duration-300 group-hover:translate-x-2">
+                                            <h3 className="font-heading font-normal text-3xl md:text-4xl lg:text-4xl tracking-tight text-white transition-transform duration-300 group-hover:translate-x-2">
                                                 {project.title}
                                             </h3>
                                             <span className="shrink-0 font-sans text-xs tracking-widest uppercase text-white/50">
                                                 {project.year}
                                             </span>
                                         </div>
-                                        <p className="font-sans text-base md:text-lg leading-relaxed text-white/75 max-w-2xl">
+                                        <p className="font-sans text-base md:text-md leading-relaxed text-white/75 max-w-2xl">
                                             {project.description}
                                         </p>
                                         {project.stack && project.stack.length > 0 && (

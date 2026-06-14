@@ -5,7 +5,7 @@ const BG_IMAGE = "https://images.unsplash.com/photo-1599940824219-e6aa9be5fba2?q
 
 export default function ContactSection() {
     return (
-        <section id="contact" className="mx-auto max-w-screen-2xl px-6 sm:px-10 lg:px-20 py-16 md:py-24">
+        <section id="contact" className="mx-10 py-16 md:py-24">
             <div className="relative overflow-hidden rounded-3xl min-h-[520px] md:min-h-[600px] flex items-center justify-center">
                 <Image
                     src={BG_IMAGE}
