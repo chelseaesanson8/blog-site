@@ -41,6 +41,7 @@ export default async function Page() {
                                 src="/intro-image.JPG"
                                 alt="Chelsea Sanson"
                                 fill
+                                priority
                                 quality={95}
                                 sizes="(max-width: 768px) 90vw, 280px"
                                 className="object-cover grayscale hover:grayscale-0 transition duration-700"
