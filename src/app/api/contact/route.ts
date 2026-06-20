@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     }
 
     // Send owner notification
-    await resend.emails.send({
+    const ownerEmail = await resend.emails.send({
       from: 'Portfolio <noreply@developedbychels.com>',
       to: 'chels@developedbychels.com',
       replyTo: data.email,
@@ -36,12 +36,17 @@ export async function POST(req: Request) {
              <p><strong>Message:</strong> ${data.message}</p>`
     })
 
+    if (ownerEmail.error) {
+      console.error('Resend error (owner notification):', ownerEmail.error)
+      return Response.json({ error: 'Failed to send notification' }, { status: 500 })
+    }
+
     // Send resume auto-reply if requested
     if (data.requestResume) {
       const settings = await client.fetch(SITE_SETTINGS_QUERY)
 
       if (settings?.resumeUrl) {
-        await resend.emails.send({
+        const resumeEmail = await resend.emails.send({
           from: 'Chels <noreply@developedbychels.com>',
           to: data.email,
           subject: 'Here\'s my resume',
@@ -52,6 +57,9 @@ export async function POST(req: Request) {
                  <p>I'll be in touch shortly.</p>
                  <p>Chels</p>`
         })
+        if (resumeEmail.error) {
+          console.error('Resend error (resume reply):', resumeEmail.error)
+        }
       } else {
         console.warn('Resume requested but no PDF uploaded in Studio')
       }
