@@ -12,6 +12,9 @@ const postDate = (postedAt: string) =>
     .format(new Date(postedAt));
 
 export default function BlogTable({ posts }: { posts: POSTS_QUERYResult }) {
+  if (!posts || posts.length === 0) {
+    return <p className="mx-10 pt-12 pb-6 text-sm tracking-widest text-black/50 dark:text-white/60 font-sans">New posts coming soon!</p>;
+  }
   return (
     <div className="pb-8">
       <div className="mx-10 pt-10 pb-6 sm:pb-0 flex items-center justify-between">

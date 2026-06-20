@@ -8,11 +8,49 @@ import { PortableText } from "next-sanity";
 import { components } from "@/sanity/portableTextComponents";
 import ShareButtons from "@/components/ShareButtons";
 import AuthorBox from "@/components/AuthorBox";
+import type { Metadata } from "next";
+
 
 const monthYear = (postedAt: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' })
     .format(new Date(postedAt));
 
+type Props = {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+
+  const { data: post } = await sanityFetch({
+    query: POST_QUERY,
+    params: { slug },
+  })
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    }
+  }
+
+  return {
+    title: post.seoTitle ?? post.title ?? undefined,
+    description: post.seoDescription ?? post.excerpt ?? undefined,
+    openGraph: {
+      title: post.seoTitle ?? post.title ?? undefined,
+      description: post.seoDescription ?? post.excerpt ?? undefined,
+      images: post.mainImage
+        ? [urlFor(post.mainImage).width(1200).height(630).url()]
+        : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seoTitle ?? post.title ?? undefined,
+      description: post.seoDescription ?? post.excerpt ?? undefined,
+    },
+  }
+}
 
 export default async function Page({
     params,

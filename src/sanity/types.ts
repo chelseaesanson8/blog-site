@@ -102,6 +102,8 @@ export type Post = {
   body?: BlockContent;
   excerpt?: string;
   readTime?: number;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type BlockContent = Array<{
@@ -369,7 +371,7 @@ export type POSTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}}
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}, seoTitle, seoDescription}
 export type POST_QUERYResult = {
   title: string | null;
   slug: Slug | null;
@@ -427,6 +429,8 @@ export type POST_QUERYResult = {
     title: string | null;
     slug: Slug | null;
   } | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
 } | null;
 // Variable: EXPERIENCES_QUERY
 // Query: *[_type == "experience"]{  _id, jobTitle, company, startDate, endDate, "isCurrent": endDate.isCurrent, description, skills}
@@ -475,16 +479,32 @@ export type SITE_SETTINGS_QUERYResult = {
   resumeUrl: string | null;
   resumeFileName: string | null;
 } | null;
+// Variable: SITEMAP_POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)]{  "slug": slug.current, _updatedAt, publishedAt}
+export type SITEMAP_POSTS_QUERYResult = Array<{
+  slug: string | null;
+  _updatedAt: string;
+  publishedAt: string | null;
+}>;
+// Variable: LLMS_POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc){  title, "slug": slug.current, excerpt}
+export type LLMS_POSTS_QUERYResult = Array<{
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}, seoTitle, seoDescription\n}": POST_QUERYResult;
     "*[_type == \"experience\"]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCES_QUERYResult;
     "*[_type == \"experience\" && _id == $id][0]{\n  _id, jobTitle, company, startDate, endDate, \"isCurrent\": endDate.isCurrent, description, skills\n}": EXPERIENCE_QUERYResult;
     "*[_type == \"caseStudy\"] | order(order asc){\n  _id, title, year, description, stack, liveUrl, sourceUrl\n}": CASE_STUDIES_QUERYResult;
     "*[_type == \"siteSettings\" && _id == \"siteSettings\"][0]{\n  \"resumeUrl\": resume.asset->url,\n  resumeFileName\n}": SITE_SETTINGS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)]{\n  \"slug\": slug.current, _updatedAt, publishedAt\n}": SITEMAP_POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)] | order(publishedAt desc){\n  title, \"slug\": slug.current, excerpt\n}": LLMS_POSTS_QUERYResult;
   }
 }

@@ -4,12 +4,28 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import BlogTable from "@/components/BlogTable";
+import type { Metadata } from "next"
 
 const options = { next: { revalidate: 60 } };
 
 const monthYear = (postedAt: string) =>
   new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' })
     .format(new Date(postedAt));
+
+export const metadata: Metadata = {
+  title: "Blog | developed by chels",
+  description: "Thoughts and notes on frontend development, dev tooling, and the occasional opinionated take on my setup.",
+  openGraph: {
+    title: "Blog | developed by chels",
+    description: "Thoughts and notes on frontend development, dev tooling, and the occasional opinionated take on my setup.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Developed by Chels",
+    description: "Thoughts and notes on frontend development, dev tooling, and the occasional opinionated take on my setup.",
+  },
+}
 
 export default async function Page() {
   const posts = await client.fetch(POSTS_QUERY, {}, options);
@@ -61,8 +77,8 @@ export default async function Page() {
               <p className="text-xs tracking-widest uppercase text-orange-400 font-sans mb-3">
                   Featured &middot; {featuredPost.category?.title}
               </p>
-              <h3 className="font-display text-3xl text-slate-700 dark:text-white">{featuredPost.title}</h3>
-              <p className="font-sans text-sm text-slate-600 dark:text-white/60 leading-relaxed max-w-xl">
+              <h3 className="font-heading text-3xl text-slate-700 dark:text-white">{featuredPost.title}</h3>
+              <p className="py-4 font-sans text-sm text-slate-600 dark:text-white/60 leading-relaxed max-w-xl">
                 {featuredPost.excerpt}
               </p>
             </div>

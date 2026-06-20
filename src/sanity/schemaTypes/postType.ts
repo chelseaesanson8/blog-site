@@ -68,6 +68,18 @@ export const postType = defineType({
       type: 'number',
       validation: Rule => Rule.min(1).integer(),
     }),
+    defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string'
+    }),
+    defineField({
+      name: 'seoDescription', 
+      title: 'SEO Description',
+      type: 'text',
+      rows: 3,
+      validation: Rule => Rule.max(165),
+    })
   ],
   preview: {
     select: {

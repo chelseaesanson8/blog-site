@@ -5,7 +5,7 @@ export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.curren
 }`)
 
 export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
-  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}
+  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}, seoTitle, seoDescription
 }`)
 
 export const EXPERIENCES_QUERY = defineQuery(`*[_type == "experience"]{
@@ -23,4 +23,12 @@ export const CASE_STUDIES_QUERY = defineQuery(`*[_type == "caseStudy"] | order(o
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings" && _id == "siteSettings"][0]{
   "resumeUrl": resume.asset->url,
   resumeFileName
+}`)
+
+export const SITEMAP_POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)]{
+  "slug": slug.current, _updatedAt, publishedAt
+}`)
+
+export const LLMS_POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)] | order(publishedAt desc){
+  title, "slug": slug.current, excerpt
 }`)

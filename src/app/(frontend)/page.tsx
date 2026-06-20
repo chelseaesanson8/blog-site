@@ -7,18 +7,34 @@ import ExperiencesMinimal from "@/components/ExperiencesMinimal";
 import ContactSection from "@/components/ContactSection";
 import CaseStudySection from "@/components/CaseStudySection";
 import BlogTable from "@/components/BlogTable";
+import { Metadata } from "next";
 
 const options = { next: { revalidate: 60 } };
+
+export const metadata: Metadata = {
+  title: "Chelsea Sanson | Frontend Developer",
+  description: "Frontend developer based in Northeast Ohio. I build things for the web, write about it, and share my work through case studies and a blog.",
+  openGraph: {
+    title: "Chelsea Sanson | Frontend Developer",
+    description: "Frontend developer based in Northeast Ohio. I build things for the web, write about it, and share my work through case studies and a blog.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chelsea Sanson | Frontend Developer",
+    description: "Frontend developer based in Northeast Ohio. I build things for the web, write about it, and share my work through case studies and a blog.",
+  },
+}
 
 export default async function Page() {
     const posts = await client.fetch(POSTS_QUERY, {}, options);
 
     return (
         <section className="bg-white dark:bg-zinc-900">
-            <div className="max-w-8xl mx-auto px-10 pt-6 lg:pt-24 pb-12 lg:pb-24">
-                <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-12 md:gap-24 md:items-center">
+            <div className="max-w-8xl mx-auto px-10 md:px-16 lg:px-24 pt-6 lg:pt-24 pb-12 lg:pb-24">
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 md:gap-24 md:items-center">
                     <div>
-                        <div className="relative aspect-video md:aspect-[3/4] overflow-hidden rounded-sm">
+                        <div className="relative aspect-video lg:aspect-[3/4] overflow-hidden rounded-sm">
                             <Image
                                 src="/intro-image.JPG"
                                 alt="Chelsea Sanson"
