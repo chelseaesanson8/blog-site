@@ -1,5 +1,7 @@
 import "@/app/globals.css";
 import { Barlow, Inter, Fraunces } from 'next/font/google'
+import { Analytics } from "@vercel/analytics/next"
+import ClarityInit from "@/components/ClarityInit";
 
 const barlow = Barlow({
   weight: '400',
@@ -27,7 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${barlow.variable} ${fraunces.variable}`} suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+        <ClarityInit />
+      </body>
     </html>
   );
 }
