@@ -18,11 +18,13 @@ export const metadata: Metadata = {
     title: "Chelsea Sanson | Frontend Developer",
     description: "Frontend developer based in Northeast Ohio. I build things for the web, write about it, and share my work through case studies and a blog.",
     type: "website",
+    images: ["/opengraph-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Chelsea Sanson | Frontend Developer",
     description: "Frontend developer based in Northeast Ohio. I build things for the web, write about it, and share my work through case studies and a blog.",
+    images: ["/opengraph-image.jpg"],
   },
 }
 
