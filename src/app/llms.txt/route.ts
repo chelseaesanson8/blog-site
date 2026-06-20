@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client"
 import { LLMS_POSTS_QUERY } from '@/sanity/lib/queries'
 
 export async function GET() {
-  const baseUrl = "https://developedbychels.com"
+  const baseUrl = "https://www.developedbychels.com"
   const posts = await client.fetch(LLMS_POSTS_QUERY)
 
   const postLines = posts
