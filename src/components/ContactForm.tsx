@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowUpRight } from 'lucide-react'
 import { contactSchema, type ContactInput } from '@/lib/contactSchema'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile' 
+import { useRef } from 'react'
 
 const fieldClass =
   'w-full rounded-lg border border-white/30 bg-white/10 backdrop-blur-sm px-4 py-3 font-sans text-white placeholder:text-white/60 transition-colors focus:border-orange-400 focus:bg-white/15 focus:outline-none focus:ring-1 focus:ring-orange-400/40'
@@ -14,6 +16,8 @@ const errorClass = 'mt-1.5 font-sans text-sm text-orange-300'
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const {
     register,
@@ -26,18 +30,23 @@ export default function ContactForm() {
   })
 
   const onSubmit = async (data: ContactInput) => {
-    setStatus('idle')
+    if (!turnstileToken) {
+      setStatus('error')
+      return
+    }
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({...data, turnstileToken: turnstileToken as string}),
       })
       if (!res.ok) throw new Error('Request failed')
       reset()
       setStatus('success')
+      turnstileRef.current?.reset()
     } catch {
       setStatus('error')
+      turnstileRef.current?.reset()
     }
   }
 
@@ -134,6 +143,13 @@ export default function ContactForm() {
           Something went wrong. Please email me directly at chels@developedbychels.com.
         </p>
       )}
+
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+        onSuccess={setTurnstileToken}
+        options={{ size: 'invisible'}}
+      />
 
       <button
         type="submit"
