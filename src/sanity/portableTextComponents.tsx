@@ -9,15 +9,15 @@ export const components: PortableTextComponents = {
                 <div>
                     <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                         <Image
-                            className="object-cover not-prose"
+                            className="not-prose w-full h-auto"
                             src={urlFor(props.value)
-                                .width(500)
-                                .height(500)
+                                .width(1200)
                                 .quality(100)
                                 .auto("format")
                                 .url()}
                             alt={props?.value?.alt || ""}
-                            fill
+                            width={props.value.asset.metadata.dimensions.width}
+                            height={props.value.asset.metadata.dimensions.height}
                             sizes="(max-width: 768px) 100vw, 800px"
                         />
                     </div>

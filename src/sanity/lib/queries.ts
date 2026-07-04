@@ -5,7 +5,18 @@ export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.curren
 }`)
 
 export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
-  title, slug, body, mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}, seoTitle, seoDescription
+  title, slug, 
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->{
+        ...,
+        metadata
+      }
+    }
+  }, 
+  mainImage, author->{name, image, bio}, publishedAt, excerpt, readTime, category->{title, slug}, seoTitle, seoDescription
 }`)
 
 export const EXPERIENCES_QUERY = defineQuery(`*[_type == "experience"]{
